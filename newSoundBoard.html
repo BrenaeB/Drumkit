@@ -1,0 +1,94 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>JS Guitar Kit</title>  
+  <link rel="stylesheet" href="style.css">  
+  <link rel="icon" href="https://fav.farm/🔥" />  
+</head>  
+<body>  
+   
+    <h2>Guitar Kit</h2>
+  <div class="slideshow-container">  
+    <div class="keys">  
+      <div data-key="65" class="key">  
+        <kbd>A</kbd>  
+        <span class="sound">1st String E</span>  
+      </div>  
+      <div data-key="83" class="key">  
+        <kbd>S</kbd>  
+        <span class="sound">2nd String B</span>  
+      </div>  
+      <div data-key="68" class="key">  
+        <kbd>D</kbd>  
+        <span class="sound">3rd String G</span>  
+      </div>  
+      <div data-key="70" class="key">  
+        <kbd>F</kbd>  
+        <span class="sound">4th String D</span>  
+      </div>  
+      <div data-key="71" class="key">  
+        <kbd>G</kbd>  
+        <span class="sound">5th String A</span>  
+      </div>  
+      <div data-key="72" class="key">  
+        <kbd>H</kbd>  
+        <span class="sound">6th String E</span>  
+      </div>  
+      <div data-key="74" class="key">  
+        <kbd>J</kbd>  
+        <span class="sound">C</span>  
+      </div>  
+      <div data-key="75" class="key">  
+        <kbd>K</kbd>  
+        <span class="sound">D</span>  
+      </div>  
+      <div data-key="76" class="key">  
+        <kbd>L</kbd>  
+        <span class="sound">DM</span>  
+      </div>  
+      <div data-key="186" class="key">  
+        <kbd>;</kbd>  
+        <span class="sound">E</span>  
+      </div>  
+    </div>  
+    <h3>Warning: Volume may be loud! Please be kind to your ears.</h3>
+
+    <div class="arrow-container">  
+        <a href="index-START.html" class="arrownext"> &#10095;</a>  
+    </div>  
+  </div>  
+
+  <audio data-key="65" src="sounds/sounds_1st_String_E_64kb.wav"></audio>  
+  <audio data-key="83" src="sounds/sounds_2nd_String_B__64kb.wav"></audio>  
+  <audio data-key="68" src="sounds/sounds_3rd_String_G_64kb (1).wav"></audio>  
+  <audio data-key="70" src="sounds/sounds_4th_String_D_64kb.wav"></audio>  
+  <audio data-key="71" src="sounds/sounds_5th_String_A_64kb.wav"></audio>  
+  <audio data-key="72" src="sounds/sounds_6th_String_E_64kb.wav"></audio>  
+  <audio data-key="74" src="sounds/sounds_C_64kb.wav"></audio>  
+  <audio data-key="75" src="sounds/sounds_4th_String_D_64kb.wav"></audio>  
+  <audio data-key="76" src="sounds/sounds_Dm_64kb.wav"></audio>  
+  <audio data-key="186" src="sounds/sounds_hihat.wav"></audio>  
+
+  <script>  
+    function playSound(e) {  
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);  
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);  
+      if (!audio) return;  
+      audio.currentTime = 0;  
+      audio.play();  
+      key.classList.add('playing');  
+    }  
+
+    function removeTransition(e) {  
+      if (e.propertyName !== 'transform') return; // Only remove class on transform  
+      this.classList.remove('playing');  
+    }  
+
+    const keys = document.querySelectorAll('.key');  
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));  
+    window.addEventListener('keydown', playSound);   
+  </script>  
+
+</body>  
+</html>  
